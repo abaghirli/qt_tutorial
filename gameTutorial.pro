@@ -17,12 +17,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     bullet.cpp \
+    enemy.cpp \
+    game.cpp \
     main.cpp \
-    myrect.cpp
+    player.cpp \
+    score.cpp
 
 HEADERS += \
     bullet.h \
-    myrect.h
+    consts.h \
+    enemy.h \
+    game.h \
+    player.h \
+    score.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
