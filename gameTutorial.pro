@@ -1,4 +1,5 @@
 QT       += core gui
+QT       += multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,6 +20,7 @@ SOURCES += \
     bullet.cpp \
     enemy.cpp \
     game.cpp \
+    health.cpp \
     main.cpp \
     player.cpp \
     score.cpp
@@ -28,6 +30,7 @@ HEADERS += \
     consts.h \
     enemy.h \
     game.h \
+    health.h \
     player.h \
     score.h
 
@@ -35,3 +38,6 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    resources.qrc
