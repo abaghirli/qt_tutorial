@@ -10,13 +10,13 @@ extern Game * game;
 
 Bullet::Bullet(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    setPixmap(QPixmap(":/graphics/bullet.png"));
+    setPixmap(game->blt_sprite);
     QTimer * timer = new QTimer();
-    kill = new QMediaPlayer();
-    kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
-    kill->setVolume(50);
+//    kill = new QMediaPlayer();
+//    kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
+//    kill->setVolume(50);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(20);
 }
 
 void Bullet::move()
@@ -25,9 +25,11 @@ void Bullet::move()
     for (int i=0, n=colliding_items.size(); i<n; i++){
         if (typeid(*(colliding_items[i])) == typeid (Enemy)){
             game->score->increase();
+            game->info->incKilled();
+            game->info->decInGame();
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            kill->play();
+            //kill->play();
             delete colliding_items[i];
             delete this;
             return;
@@ -37,6 +39,5 @@ void Bullet::move()
     if (pos().y()+pixmap().height() <0){
         scene()->removeItem(this);
         delete this;
-        qDebug() << "bullet deleted";
     }
 }

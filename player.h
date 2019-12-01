@@ -4,6 +4,7 @@
 #include <QGraphicsPixmapItem>
 #include <QObject>
 #include <QSound>
+#include <QTimer>
 
 class Player: public QObject, public QGraphicsPixmapItem{
     Q_OBJECT
@@ -11,10 +12,14 @@ public:
     Player(QGraphicsItem * parent=nullptr);
 protected:
     virtual void keyPressEvent(QKeyEvent * ev);
-public slots:
-    void spawn();
+    virtual void keyReleaseEvent(QKeyEvent * ev);
 private:
     QSound * shot;
+    QTimer * movetimer, * firetimer;
+    bool movleft, movright, firing;
+private slots:
+    void move();
+    void fire();
 };
 
 #endif // MYRECT_H

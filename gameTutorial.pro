@@ -21,8 +21,10 @@ SOURCES += \
     enemy.cpp \
     game.cpp \
     health.cpp \
+    info.cpp \
     main.cpp \
     player.cpp \
+    scenebutton.cpp \
     score.cpp
 
 HEADERS += \
@@ -31,7 +33,9 @@ HEADERS += \
     enemy.h \
     game.h \
     health.h \
+    info.h \
     player.h \
+    scenebutton.h \
     score.h
 
 # Default rules for deployment.

@@ -9,6 +9,7 @@ static const int enemy_width = 50;
 static const int enemy_height = 50;
 static const int bullet_width = 7;
 static const int bullet_height = 20;
+static const int panel_offset = 100;
 
 
 
