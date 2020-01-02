@@ -12,7 +12,7 @@ extern Game * game;
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
-    //shot = new QSound(":/sound/shot.wav");
+    shot = new QSound(":/sound/shot.wav");
     QPixmap * sprites = new QPixmap(":/graphics/sprites.png");
     setPixmap(sprites->copy(0, 21, 20, 20).scaledToHeight(player_height, Qt::SmoothTransformation));
     delete sprites;
@@ -51,7 +51,7 @@ void Player::keyPressEvent(QKeyEvent *event)
         bullet->setPos(x()+(player_width/2 - bullet_width/2), y());
         scene()->addItem(bullet);
         //shot->play();
-        firetimer->start(10);
+        firetimer->start(30);
     }
 }
 
@@ -87,5 +87,5 @@ void Player::fire()
     Bullet * bullet = new Bullet();
     bullet->setPos(x()+(player_width/2 - bullet_width/2), y());
     scene()->addItem(bullet);
-    //shot->play();
+    shot->play();
 }

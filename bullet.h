@@ -10,8 +10,6 @@ class Bullet: public QObject, public QGraphicsPixmapItem
     Q_OBJECT
 public:
     Bullet(QGraphicsItem * parent=nullptr);
-private:
-    QMediaPlayer * kill;
 
 public slots:
     void move();

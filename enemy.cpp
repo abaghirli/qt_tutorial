@@ -15,9 +15,6 @@ Enemy::Enemy()
     QPixmap * sprites = new QPixmap(":/graphics/sprites.png");
     setPixmap(sprites->copy(0, 0, 20, 20).scaledToHeight(enemy_height, Qt::SmoothTransformation));
     delete sprites;
-    //fail = new QMediaPlayer();
-    //fail->setMedia(QUrl("qrc:/sound/fail.mp3"));
-    //fail->setVolume(50);
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(100);
@@ -28,7 +25,7 @@ void Enemy::move()
 {
     setPos(x(), y()+2);
     if (pos().y()-boundingRect().height() > game_scene_height){
-        //fail->play();
+        game->fail->play();
         game->health->decrease();
         game->info->incPassed();
         game->info->decInGame();

@@ -12,9 +12,6 @@ Bullet::Bullet(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
 {
     setPixmap(game->blt_sprite);
     QTimer * timer = new QTimer();
-//    kill = new QMediaPlayer();
-//    kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
-//    kill->setVolume(50);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(20);
 }
@@ -29,7 +26,7 @@ void Bullet::move()
             game->info->decInGame();
             scene()->removeItem(colliding_items[i]);
             scene()->removeItem(this);
-            //kill->play();
+            game->kill->play();
             delete colliding_items[i];
             delete this;
             return;

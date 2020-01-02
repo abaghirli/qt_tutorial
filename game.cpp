@@ -44,6 +44,12 @@ Game::Game(QWidget *parent){
     QSound * back = new QSound(":/sound/back.wav");
     back->setLoops(-1);
     back->play();
+    fail = new QMediaPlayer();
+    fail->setMedia(QUrl("qrc:/sound/fail.mp3"));
+    fail->setVolume(50);
+    kill = new QMediaPlayer();
+    kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
+    kill->setVolume(50);
 
     show();
 }
