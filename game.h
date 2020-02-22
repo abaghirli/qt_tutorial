@@ -5,6 +5,7 @@
 #include <QWidget>
 #include <QGraphicsScene>
 #include <QMediaPlayer>
+#include <QSound>
 #include "player.h"
 #include "score.h"
 #include "health.h"
@@ -22,6 +23,7 @@ public:
     Info * info;
     QMediaPlayer * kill;
     QMediaPlayer * fail;
+    QSound * shot;
     QPixmap * sprites;
     QPixmap blt_sprite;
     QPixmap plr_sprite;

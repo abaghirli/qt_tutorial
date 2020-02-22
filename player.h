@@ -14,10 +14,10 @@ protected:
     virtual void keyPressEvent(QKeyEvent * ev);
     virtual void keyReleaseEvent(QKeyEvent * ev);
 private:
-    QSound * shot;
+    //QSound * shot;
     QTimer * movetimer, * firetimer;
     bool movleft, movright, firing;
-    int firing_speed;
+    int firing_speed, moving_speed;
 private slots:
     void move();
     void fire();

@@ -52,6 +52,7 @@ Game::Game(QWidget *parent){
     kill = new QMediaPlayer();
     kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
     kill->setVolume(sManager->getIntSetting("game/sound"));
+    shot = new QSound(":/sound/shot.wav");
 
     show();
 }

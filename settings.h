@@ -4,13 +4,13 @@
 
 static const int game_scene_width = 900;
 static const int game_scene_height = 600;
-static const int player_width = 80;
-static const int player_height = 80;
-static const int enemy_width = 50;
-static const int enemy_height = 50;
-static const int bullet_width = 7;
-static const int bullet_height = 20;
-static const int panel_offset = 100;
+static const int player_width = game_scene_height/7.5;
+static const int player_height = game_scene_height/7.5;
+static const int enemy_width = game_scene_height/12;
+static const int enemy_height = game_scene_height/12;
+static const int bullet_width = game_scene_height/75;
+static const int bullet_height = game_scene_height/30;
+static const int panel_offset = game_scene_height/6;
 
 class SettingsManager : public QObject{
     Q_OBJECT
