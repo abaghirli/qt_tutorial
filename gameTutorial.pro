@@ -25,18 +25,19 @@ SOURCES += \
     main.cpp \
     player.cpp \
     scenebutton.cpp \
-    score.cpp
+    score.cpp \
+    settings.cpp
 
 HEADERS += \
     bullet.h \
-    consts.h \
     enemy.h \
     game.h \
     health.h \
     info.h \
     player.h \
     scenebutton.h \
-    score.h
+    score.h \
+    settings.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

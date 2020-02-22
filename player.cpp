@@ -1,5 +1,5 @@
 #include "player.h"
-#include "consts.h"
+#include "settings.h"
 #include "bullet.h"
 #include "enemy.h"
 #include "game.h"
@@ -8,6 +8,7 @@
 #include <QKeyEvent>
 #include <QMediaPlayer>
 
+extern SettingsManager * sManager;
 extern Game * game;
 
 Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
@@ -20,6 +21,7 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     movright = false;
     movetimer = new QTimer();
     firetimer = new QTimer();
+    firing_speed = 1000/sManager->getIntSetting("bullet/firing_speed");
     connect(movetimer, SIGNAL(timeout()), this, SLOT(move()));
     connect(firetimer, SIGNAL(timeout()), this, SLOT(fire()));
 }
@@ -51,7 +53,7 @@ void Player::keyPressEvent(QKeyEvent *event)
         bullet->setPos(x()+(player_width/2 - bullet_width/2), y());
         scene()->addItem(bullet);
         //shot->play();
-        firetimer->start(30);
+        firetimer->start(firing_speed);
     }
 }
 

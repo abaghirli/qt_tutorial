@@ -1,13 +1,15 @@
 #include "game.h"
 #include "player.h"
 #include "enemy.h"
-#include "consts.h"
+#include "settings.h"
 #include <QGraphicsScene>
 #include <QGraphicsView>
 #include <QTimer>
 #include <QMediaPlayer>
-#include <QSound>
+#include <QSoundEffect>
 #include <QEvent>
+
+extern SettingsManager * sManager;
 
 Game::Game(QWidget *parent){
     scene = new QGraphicsScene();
@@ -39,17 +41,17 @@ Game::Game(QWidget *parent){
 
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
-    timer->start(100);
+    timer->start(1000/sManager->getIntSetting("game/spawn/speed"));
 
     QSound * back = new QSound(":/sound/back.wav");
     back->setLoops(-1);
     back->play();
     fail = new QMediaPlayer();
     fail->setMedia(QUrl("qrc:/sound/fail.mp3"));
-    fail->setVolume(50);
+    fail->setVolume(sManager->getIntSetting("game/sound"));
     kill = new QMediaPlayer();
     kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
-    kill->setVolume(50);
+    kill->setVolume(sManager->getIntSetting("game/sound"));
 
     show();
 }

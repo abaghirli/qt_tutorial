@@ -17,6 +17,7 @@ private:
     QSound * shot;
     QTimer * movetimer, * firetimer;
     bool movleft, movright, firing;
+    int firing_speed;
 private slots:
     void move();
     void fire();

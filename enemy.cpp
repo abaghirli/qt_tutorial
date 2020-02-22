@@ -1,5 +1,5 @@
 #include "enemy.h"
-#include "consts.h"
+#include "settings.h"
 #include "game.h"
 #include <QTimer>
 #include <QGraphicsScene>
@@ -7,6 +7,7 @@
 #include <stdlib.h>
 
 extern Game * game;
+extern SettingsManager * sManager;
 
 Enemy::Enemy()
 {
@@ -17,7 +18,8 @@ Enemy::Enemy()
     delete sprites;
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(100);
+    int speed = sManager->getIntSetting("enemy/speed");
+    timer->start(1000/speed);
     game->passed_enemies++;
 }
 
