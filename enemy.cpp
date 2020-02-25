@@ -12,7 +12,7 @@ Enemy::Enemy(Game* p_game)
     int rn = rand() % (game_scene_width-enemy_width-panel_offset);
     setPos(rn+panel_offset, 0);
     QPixmap * sprites = new QPixmap(":/graphics/sprites.png");
-    setPixmap(sprites->copy(0, 0, 20, 20).scaledToHeight(enemy_height, Qt::SmoothTransformation));
+    setPixmap(_game->enm_sprite);    //(sprites->copy(0, 0, 20, 20).scaledToHeight(enemy_height, Qt::SmoothTransformation));
     delete sprites;
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));

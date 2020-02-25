@@ -3,9 +3,6 @@
 #include "player.h"
 #include "settings.h"
 
-//Game * game;
-//SettingsManager * sManager;
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

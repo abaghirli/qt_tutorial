@@ -4,7 +4,9 @@
 #include <QGraphicsView>
 #include <QWidget>
 #include <QGraphicsScene>
+#include <QPushButton>
 #include <QMediaPlayer>
+#include <QTimer>
 #include <QSound>
 #include "player.h"
 #include "score.h"
@@ -21,9 +23,12 @@ public:
     Game(SettingsManager* sMgr, QWidget* parent=nullptr);
     QGraphicsScene * scene;
     SettingsManager * _sManager;
+    QPushButton* p_btns;
+    QPushButton* p_btnq;
     Player * player;
     Score * score;
     Health * health;
+    QTimer * timer;
     Info * info;
     QMediaPlayer * kill;
     QMediaPlayer * fail;
@@ -35,8 +40,10 @@ public:
     int created_enemies, killed_enemies, passed_enemies;
     bool paused;
     void pause();
+    void startscreen();
 public slots:
     void spawn();
+    void startgame();
 protected:
     void resizeEvent(QResizeEvent *event) override;
 };
