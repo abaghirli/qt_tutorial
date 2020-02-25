@@ -8,12 +8,10 @@
 #include <QKeyEvent>
 #include <QMediaPlayer>
 
-extern SettingsManager * sManager;
-extern Game * game;
-
-Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
+Player::Player(Game* p_game, QGraphicsItem *parent): QGraphicsPixmapItem(parent)
 {
     //shot = new QSound(":/sound/shot.wav");
+    _game = p_game;
     QPixmap * sprites = new QPixmap(":/graphics/sprites.png");
     setPixmap(sprites->copy(0, 21, 20, 20).scaledToHeight(player_height, Qt::SmoothTransformation));
     delete sprites;
@@ -21,8 +19,8 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     movright = false;
     movetimer = new QTimer();
     firetimer = new QTimer();
-    firing_speed = 1000/sManager->getIntSetting("bullet/firing_speed");
-    moving_speed = 1000/sManager->getIntSetting("player/speed");
+    firing_speed = 1000/_game->_sManager->getIntSetting("bullet/firing_speed");
+    moving_speed = 1000/_game->_sManager->getIntSetting("player/speed");
     connect(movetimer, SIGNAL(timeout()), this, SLOT(move()));
     connect(firetimer, SIGNAL(timeout()), this, SLOT(fire()));
 }
@@ -90,10 +88,10 @@ void Player::move()
 void Player::fire()
 {
     if (firing){
-        Bullet * bullet = new Bullet();
+        Bullet * bullet = new Bullet(_game);
         bullet->setPos(x()+(player_width/2 - bullet_width/2), y());
         scene()->addItem(bullet);
-        game->shot->play();
+        _game->shot->play();
         qDebug() << "bullet fired";
     }
     else

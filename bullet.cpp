@@ -1,18 +1,15 @@
 #include "bullet.h"
 #include "enemy.h"
 #include "game.h"
-#include "settings.h"
 #include <QTimer>
 #include <QGraphicsScene>
 #include <QDebug>
 #include <QList>
 
-extern Game * game;
-extern SettingsManager * sManager;
-
-Bullet::Bullet(QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
+Bullet::Bullet(Game* game, QGraphicsItem * parent): QObject(), QGraphicsPixmapItem(parent)
 {
-    int bullet_speed = sManager->getIntSetting("bullet/speed");
+    _game = game;
+    int bullet_speed = _game->_sManager->getIntSetting("bullet/speed");
     setPixmap(game->blt_sprite);
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
@@ -24,12 +21,12 @@ void Bullet::move()
     QList <QGraphicsItem *> colliding_items = collidingItems();
     for (int i=0, n=colliding_items.size(); i<n; i++){
         if (typeid(*(colliding_items[i])) == typeid (Enemy)){
-            game->score->increase();
-            game->info->incKilled();
-            game->info->decInGame();
+            _game->score->increase();
+            _game->info->incKilled();
+            _game->info->decInGame();
             scene()->removeItem(colliding_items[i]);
              scene()->removeItem(this);
-            game->kill->play();
+            _game->kill->play();
             delete colliding_items[i];
             delete this;
             return;

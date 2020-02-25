@@ -6,11 +6,9 @@
 #include <QDebug>
 #include <stdlib.h>
 
-extern Game * game;
-extern SettingsManager * sManager;
-
-Enemy::Enemy()
+Enemy::Enemy(Game* p_game)
 {
+    _game = p_game;
     int rn = rand() % (game_scene_width-enemy_width-panel_offset);
     setPos(rn+panel_offset, 0);
     QPixmap * sprites = new QPixmap(":/graphics/sprites.png");
@@ -18,19 +16,19 @@ Enemy::Enemy()
     delete sprites;
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    int speed = sManager->getIntSetting("enemy/speed");
+    int speed = _game->_sManager->getIntSetting("enemy/speed");
     timer->start(1000/speed);
-    game->passed_enemies++;
+    _game->passed_enemies++;
 }
 
 void Enemy::move()
 {
     setPos(x(), y()+2);
     if (pos().y()-boundingRect().height() > game_scene_height){
-        game->fail->play();
-        game->health->decrease();
-        game->info->incPassed();
-        game->info->decInGame();
+        _game->fail->play();
+        _game->health->decrease();
+        _game->info->incPassed();
+        _game->info->decInGame();
         scene()->removeItem(this);
         delete this;
     }

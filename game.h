@@ -10,13 +10,17 @@
 #include "score.h"
 #include "health.h"
 #include "info.h"
+#include "settings.h"
+
+class Player;
 
 class Game : public QGraphicsView
 {
     Q_OBJECT
 public:
-    Game(QWidget * parent=nullptr);
+    Game(SettingsManager* sMgr, QWidget* parent=nullptr);
     QGraphicsScene * scene;
+    SettingsManager * _sManager;
     Player * player;
     Score * score;
     Health * health;
@@ -27,7 +31,7 @@ public:
     QPixmap * sprites;
     QPixmap blt_sprite;
     QPixmap plr_sprite;
-    QPixmap enm_sprite;
+    QPixmap enm_sprite;    
     int created_enemies, killed_enemies, passed_enemies;
     bool paused;
     void pause();

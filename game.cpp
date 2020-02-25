@@ -9,9 +9,7 @@
 #include <QSoundEffect>
 #include <QEvent>
 
-extern SettingsManager * sManager;
-
-Game::Game(QWidget *parent){
+Game::Game(SettingsManager* sMgr, QWidget *parent){
     scene = new QGraphicsScene();
     scene->setSceneRect(0, 0, game_scene_width, game_scene_height);
     setBackgroundBrush(QBrush(QImage(":/graphics/cloudy.png")));
@@ -23,8 +21,9 @@ Game::Game(QWidget *parent){
     setScene(scene);
     setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+    _sManager = sMgr;
 
-    player = new Player();
+    player = new Player(this);
     player->setPos(game_scene_width/2 - player_width/2 - panel_offset/2, game_scene_height-player_height);
     player->setFlag(QGraphicsItem::ItemIsFocusable);
     player->setFocus();
@@ -41,17 +40,17 @@ Game::Game(QWidget *parent){
 
     QTimer * timer = new QTimer();
     connect(timer, SIGNAL(timeout()), this, SLOT(spawn()));
-    timer->start(1000/sManager->getIntSetting("game/spawn/speed"));
+    timer->start(1000/_sManager->getIntSetting("game/spawn/speed"));
 
     QSound * back = new QSound(":/sound/back.wav");
     back->setLoops(-1);
     back->play();
     fail = new QMediaPlayer();
     fail->setMedia(QUrl("qrc:/sound/fail.mp3"));
-    fail->setVolume(sManager->getIntSetting("game/sound"));
+    fail->setVolume(_sManager->getIntSetting("game/sound"));
     kill = new QMediaPlayer();
     kill->setMedia(QUrl("qrc:/sound/kill.mp3"));
-    kill->setVolume(sManager->getIntSetting("game/sound"));
+    kill->setVolume(_sManager->getIntSetting("game/sound"));
     shot = new QSound(":/sound/shot.wav");
 
     show();
@@ -71,7 +70,7 @@ void Game::resizeEvent(QResizeEvent *event)
 
 void Game::spawn()
 {
-    Enemy * enemy = new Enemy();
+    Enemy * enemy = new Enemy(this);
     scene->addItem(enemy);
     info->incCreated();
     info->incInGame();
