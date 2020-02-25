@@ -2,8 +2,8 @@
 #define CONSTS_H
 #include <QSettings>
 
-static const int game_scene_width = 900;
-static const int game_scene_height = 600;
+static const int game_scene_width = 390;
+static const int game_scene_height = 260;
 static const int player_width = game_scene_height/7.5;
 static const int player_height = game_scene_height/7.5;
 static const int enemy_width = game_scene_height/12;

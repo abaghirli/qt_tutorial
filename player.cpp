@@ -22,7 +22,7 @@ Player::Player(QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     movetimer = new QTimer();
     firetimer = new QTimer();
     firing_speed = 1000/sManager->getIntSetting("bullet/firing_speed");
-    moving_speed = sManager->getIntSetting("player/speed");
+    moving_speed = 1000/sManager->getIntSetting("player/speed");
     connect(movetimer, SIGNAL(timeout()), this, SLOT(move()));
     connect(firetimer, SIGNAL(timeout()), this, SLOT(fire()));
 }
