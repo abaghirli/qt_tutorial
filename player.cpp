@@ -19,10 +19,13 @@ Player::Player(Game* p_game, QGraphicsItem *parent): QGraphicsPixmapItem(parent)
     movright = false;
     movetimer = new QTimer();
     firetimer = new QTimer();
+    firetimer->setSingleShot(true);
+    firing = false;
     firing_speed = 1000/_game->_sManager->getIntSetting("bullet/firing_speed");
     moving_speed = 1000/_game->_sManager->getIntSetting("player/speed");
     connect(movetimer, SIGNAL(timeout()), this, SLOT(move()));
     connect(firetimer, SIGNAL(timeout()), this, SLOT(fire()));
+    firetimer->start(firing_speed);
 }
 
 
@@ -49,8 +52,8 @@ void Player::keyPressEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Space){
         if (not firing) {
-            firetimer->start(firing_speed);
             firing = true;
+            fire();
             qDebug() << "firing on";
         }
     }
@@ -68,7 +71,6 @@ void Player::keyReleaseEvent(QKeyEvent *event)
     }
     else if (event->key() == Qt::Key_Space){
         firing = false;
-        firetimer->stop();
         qDebug() << "firing off";
     }
 }
@@ -87,13 +89,15 @@ void Player::move()
 
 void Player::fire()
 {
-    if (firing){
+    if (firing and firetimer->remainingTime() == -1){
         Bullet * bullet = new Bullet(_game);
         bullet->setPos(x()+(player_width/2 - bullet_width/2), y());
         scene()->addItem(bullet);
         _game->shot->play();
         qDebug() << "bullet fired";
+        firetimer->start(firing_speed);
     }
     else
+        qDebug() << "Timer:" << firetimer->isActive() << "remaining" << firetimer->remainingTime();
         qDebug() << "bullet not fired";
 }

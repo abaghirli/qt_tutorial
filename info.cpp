@@ -8,8 +8,8 @@ Info::Info(QGraphicsItem *parent): QGraphicsTextItem(parent)
     killed  = 0;
     passed  = 0;
     ingame  = 0;
-    setPlainText( QString("Created: ")  + QString::number(created)
-                 +QString("\n Killed:") +QString::number(killed)
+    setPlainText( "Created: "  + QString::number(created)
+                 +"\n Killed:" +QString::number(killed)
                  +QString("\n Passed:") +QString::number(passed)
                  +QString("\n In Game") +QString::number(ingame));
     setDefaultTextColor(Qt::black);

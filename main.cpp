@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     SettingsManager * sManager = new SettingsManager("Anar", "Shooter");
-    Game * game = new Game(sManager);
+    Game * game = new Game(sManager, &a);
     game->show();
     return a.exec();
 }
