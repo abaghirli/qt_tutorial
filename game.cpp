@@ -52,6 +52,7 @@ void Game::pause()
 void Game::startgame()
 {
     scene->removeItem(p_qbp);
+    scene->removeItem(p_sbp);
     player = new Player(this);
     player->setPos(game_scene_width/2 - player_width/2 - panel_offset/2, game_scene_height-player_height);
     player->setFlag(QGraphicsItem::ItemIsFocusable);

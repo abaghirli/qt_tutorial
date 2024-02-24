@@ -5,11 +5,11 @@ SettingsManager::SettingsManager(const QString &organization, const QString &app
     : m_settings(organization, application)
 {
     //setting default values
-    m_settings.setValue("bullet/speed", 50);
-    m_settings.setValue("bullet/firing_speed", 1); // shots per second
-    m_settings.setValue("enemy/speed", 5);
+    m_settings.setValue("bullet/speed", 100);
+    m_settings.setValue("bullet/firing_speed", 4); // shots per second
+    m_settings.setValue("enemy/speed", 2);
     m_settings.setValue("player/speed", 50);
-    m_settings.setValue("game/spawn/speed", 10);
+    m_settings.setValue("game/spawn/speed", 5);
     m_settings.setValue("game/sound", 50);
     m_settings.setValue("game/music", 50);
 }
